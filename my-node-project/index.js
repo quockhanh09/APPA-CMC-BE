@@ -1,0 +1,1 @@
+console.log("Xin chào, dự án Node.js đã chạy thành công!");
