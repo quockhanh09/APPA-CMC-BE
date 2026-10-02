@@ -5,6 +5,7 @@ const helmet = require('helmet')
 
 const authRoutes = require('./src/routes/auth.routes')
 const staffRoutes = require('./src/routes/staff.routes')
+const applicationsRoutes = require('./src/routes/applications.routes')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -19,6 +20,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes)
 app.use('/api/staff', staffRoutes)
+app.use('/api/applications', applicationsRoutes)
 
 app.use((req, res) => {
   res.status(404).json({ message: 'Không tìm thấy đường dẫn' })

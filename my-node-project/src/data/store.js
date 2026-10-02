@@ -23,6 +23,7 @@ function seedData() {
         passwordHash: defaultPasswordHash,
       },
     ],
+    applications: {},
   }
 }
 
@@ -32,7 +33,11 @@ function load() {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8')
     return data
   }
-  return JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'))
+  const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'))
+  if (!data.applications) {
+    data.applications = {}
+  }
+  return data
 }
 
 function save(data) {
@@ -79,6 +84,99 @@ function updateStaff(id, updates) {
   return member
 }
 
+function addHistory(state, text) {
+  state.history.push({ at: new Date().toISOString(), text })
+}
+
+function createApplicationState(id) {
+  const now = new Date().toISOString()
+  const state = {
+    id,
+    createdAt: now,
+    review: { status: 'pending', at: null },
+    payment: { confirmed: false, confirmedAt: null, proof: null, verified: false, verifiedAt: null },
+    certificate: { issued: false, issuedAt: null },
+    history: [],
+  }
+  addHistory(state, 'Khách hàng tạo đơn thành công')
+  addHistory(state, 'Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2')
+  addHistory(state, 'Hệ thống gửi email xác nhận hồ sơ')
+  return state
+}
+
+function getApplicationState(id) {
+  if (!db.applications[id]) {
+    db.applications[id] = createApplicationState(id)
+    save(db)
+  }
+  return db.applications[id]
+}
+
+function reviewApplication(id, action) {
+  const state = getApplicationState(id)
+  const statusByAction = {
+    approve: 'approved',
+    request_edit: 'edit_requested',
+    reject: 'rejected',
+  }
+  const nextStatus = statusByAction[action]
+  if (!nextStatus) return null
+
+  // duyệt đang chờ: cho phép duyệt/yêu cầu sửa/từ chối; đã duyệt: chỉ còn được từ chối, và chỉ khi khách chưa gửi chứng từ thanh toán
+  const canTransition =
+    state.review.status === 'pending' ||
+    (state.review.status === 'approved' && action === 'reject' && !state.payment.proof)
+  if (!canTransition) {
+    return null
+  }
+
+  state.review.status = nextStatus
+  state.review.at = new Date().toISOString()
+  const textByAction = {
+    approve: 'Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán',
+    request_edit: 'Nhân viên yêu cầu khách hàng sửa hồ sơ',
+    reject: 'Nhân viên từ chối hồ sơ',
+  }
+  addHistory(state, textByAction[action])
+  save(db)
+  return state
+}
+
+function acceptApplicationPayment(id) {
+  const state = getApplicationState(id)
+  if (state.review.status !== 'approved' || !state.payment.proof) {
+    return null
+  }
+  state.payment.verified = true
+  state.payment.verifiedAt = new Date().toISOString()
+  state.certificate.issued = true
+  state.certificate.issuedAt = state.payment.verifiedAt
+  addHistory(state, 'Nhân viên chấp nhận thanh toán và cấp giấy chứng nhận')
+  save(db)
+  return state
+}
+
+function confirmApplicationPayment(id) {
+  const state = getApplicationState(id)
+  if (state.payment.confirmed) return state
+  state.payment.confirmed = true
+  state.payment.confirmedAt = new Date().toISOString()
+  addHistory(state, 'Khách hàng xác nhận đã thanh toán')
+  save(db)
+  return state
+}
+
+function uploadApplicationPaymentProof(id, fileName) {
+  const state = getApplicationState(id)
+  if (!state.payment.confirmed) {
+    return null
+  }
+  state.payment.proof = { fileName, uploadedAt: new Date().toISOString() }
+  addHistory(state, `Khách hàng tải lên chứng từ thanh toán: ${fileName}`)
+  save(db)
+  return state
+}
+
 module.exports = {
   getStaff,
   findStaffByEmail,
@@ -87,4 +185,9 @@ module.exports = {
   nextStaffId,
   addStaff,
   updateStaff,
+  getApplicationState,
+  reviewApplication,
+  confirmApplicationPayment,
+  uploadApplicationPaymentProof,
+  acceptApplicationPayment,
 }
