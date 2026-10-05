@@ -6,6 +6,7 @@ const helmet = require('helmet')
 const authRoutes = require('./src/routes/auth.routes')
 const staffRoutes = require('./src/routes/staff.routes')
 const applicationsRoutes = require('./src/routes/applications.routes')
+const verificationRoutes = require('./src/routes/verification.routes')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -18,6 +19,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' })
 })
 
+app.use(verificationRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/staff', staffRoutes)
 app.use('/api/applications', applicationsRoutes)

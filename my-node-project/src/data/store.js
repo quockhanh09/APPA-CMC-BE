@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { randomBytes } = require('crypto')
 const bcrypt = require('bcryptjs')
 
 const DB_FILE = path.join(__dirname, 'db.json')
@@ -93,9 +94,9 @@ function createApplicationState(id) {
   const state = {
     id,
     createdAt: now,
-    review: { status: 'pending', at: null },
+    review: { status: 'pending', at: null, forcedTone: null },
     payment: { confirmed: false, confirmedAt: null, proof: null, verified: false, verifiedAt: null },
-    certificate: { issued: false, issuedAt: null },
+    certificate: { issued: false, issuedAt: null, sent: false, sentAt: null },
     history: [],
   }
   addHistory(state, 'Khách hàng tạo đơn thành công')
@@ -156,6 +157,81 @@ function acceptApplicationPayment(id) {
   return state
 }
 
+// nut "Duyet" / "De nghi thanh toan" tach rieng: moi nut chot ngay ket qua hien thi (licensed/expired)
+function quickReviewApplication(id, outcome) {
+  const state = getApplicationState(id)
+  if (state.review.status !== 'pending') {
+    return null
+  }
+  const now = new Date().toISOString()
+  state.review.status = 'approved'
+  state.review.at = now
+  state.review.forcedTone = outcome
+
+  if (outcome === 'licensed') {
+    state.payment.confirmed = true
+    state.payment.confirmedAt = now
+    state.payment.verified = true
+    state.payment.verifiedAt = now
+    state.certificate.issued = true
+    state.certificate.issuedAt = now
+    addHistory(state, 'Nhân viên duyệt hồ sơ và cấp phép')
+  } else if (outcome === 'expired') {
+    addHistory(state, 'Nhân viên gửi đề nghị thanh toán - hồ sơ quá hạn')
+  } else {
+    return null
+  }
+
+  save(db)
+  return state
+}
+
+function prepareApplicationCertificate(id, details) {
+  const state = getApplicationState(id)
+  if (state.review.forcedTone !== 'licensed' && !state.certificate.issued) {
+    return null
+  }
+
+  if (
+    state.certificate.sent &&
+    state.certificate.verificationToken &&
+    state.certificate.details
+  ) {
+    return state
+  }
+
+  if (!state.certificate.verificationToken) {
+    state.certificate.verificationToken = randomBytes(24).toString('hex')
+  }
+  state.certificate.details = details
+  save(db)
+  return state
+}
+
+function sendApplicationCertificate(id) {
+  const state = getApplicationState(id)
+  if (
+    (state.review.forcedTone !== 'licensed' && !state.certificate.issued) ||
+    !state.certificate.verificationToken ||
+    !state.certificate.details
+  ) {
+    return null
+  }
+  if (state.certificate.sent) return state
+
+  state.certificate.sent = true
+  state.certificate.sentAt = new Date().toISOString()
+  addHistory(state, 'Nhân viên gửi giấy chứng nhận cấp phép cho khách hàng')
+  save(db)
+  return state
+}
+
+function findApplicationByVerificationToken(token) {
+  return Object.values(db.applications).find(
+    (state) => state.certificate?.verificationToken === token,
+  ) || null
+}
+
 function confirmApplicationPayment(id) {
   const state = getApplicationState(id)
   if (state.payment.confirmed) return state
@@ -190,4 +266,8 @@ module.exports = {
   confirmApplicationPayment,
   uploadApplicationPaymentProof,
   acceptApplicationPayment,
+  quickReviewApplication,
+  prepareApplicationCertificate,
+  sendApplicationCertificate,
+  findApplicationByVerificationToken,
 }
