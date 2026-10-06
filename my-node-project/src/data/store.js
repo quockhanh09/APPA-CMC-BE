@@ -3,7 +3,7 @@ const path = require('path')
 const { randomBytes } = require('crypto')
 const bcrypt = require('bcryptjs')
 
-const DB_FILE = path.join(__dirname, 'db.json')
+const DB_FILE = process.env.DB_FILE || path.join(__dirname, 'db.json')
 
 function seedData() {
   const defaultPasswordHash = bcrypt.hashSync('appa123', 10)
@@ -25,6 +25,7 @@ function seedData() {
       },
     ],
     applications: {},
+    registrationData: {},
   }
 }
 
@@ -37,6 +38,9 @@ function load() {
   const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf-8'))
   if (!data.applications) {
     data.applications = {}
+  }
+  if (!data.registrationData) {
+    data.registrationData = {}
   }
   return data
 }
@@ -111,6 +115,30 @@ function getApplicationState(id) {
     save(db)
   }
   return db.applications[id]
+}
+
+function getRegisteredApplications() {
+  return Object.values(db.registrationData)
+    .map((registration) => ({
+      ...registration,
+      workflow: db.applications[registration.id] || null,
+    }))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+}
+
+function createRegistration(registration) {
+  if (db.registrationData[registration.id] || db.applications[registration.id]) {
+    return null
+  }
+
+  const savedRegistration = {
+    ...registration,
+    createdAt: new Date().toISOString(),
+  }
+  db.registrationData[savedRegistration.id] = savedRegistration
+  db.applications[savedRegistration.id] = createApplicationState(savedRegistration.id)
+  save(db)
+  return savedRegistration
 }
 
 function reviewApplication(id, action) {
@@ -261,6 +289,8 @@ module.exports = {
   nextStaffId,
   addStaff,
   updateStaff,
+  getRegisteredApplications,
+  createRegistration,
   getApplicationState,
   reviewApplication,
   confirmApplicationPayment,

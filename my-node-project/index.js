@@ -6,13 +6,29 @@ const helmet = require('helmet')
 const authRoutes = require('./src/routes/auth.routes')
 const staffRoutes = require('./src/routes/staff.routes')
 const applicationsRoutes = require('./src/routes/applications.routes')
+const registrationsRoutes = require('./src/routes/registrations.routes')
 const verificationRoutes = require('./src/routes/verification.routes')
 
 const app = express()
 const PORT = process.env.PORT || 4000
 
+const allowedOrigins = new Set([
+  'https://dangkysudung.appa.org.vn',
+  'https://appa-cmc.vercel.app',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
+  ...(process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+])
+
 app.use(helmet())
-app.use(cors())
+app.use(cors({
+  origin: (origin, callback) => callback(null, !origin || allowedOrigins.has(origin)),
+}))
 app.use(express.json())
 
 app.get('/api/health', (req, res) => {
@@ -22,6 +38,7 @@ app.get('/api/health', (req, res) => {
 app.use(verificationRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/staff', staffRoutes)
+app.use('/api/registrations', registrationsRoutes)
 app.use('/api/applications', applicationsRoutes)
 
 app.use((req, res) => {

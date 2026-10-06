@@ -14,6 +14,10 @@ function getPublicBaseUrl() {
   return `http://localhost:${process.env.PORT || 4000}`
 }
 
+router.get('/', verifyToken, (req, res) => {
+  res.json({ applications: store.getRegisteredApplications() })
+})
+
 router.use(verifyToken)
 
 router.get('/:id', (req, res) => {
