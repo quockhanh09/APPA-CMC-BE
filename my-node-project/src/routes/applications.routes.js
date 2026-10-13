@@ -1,6 +1,6 @@
 const express = require('express')
 const store = require('../data/store')
-const { verifyToken } = require('../middleware/auth')
+const { verifyToken, requireEditPermission } = require('../middleware/auth')
 
 const router = express.Router()
 
@@ -25,7 +25,7 @@ router.get('/:id', (req, res) => {
   res.json({ application: state })
 })
 
-router.patch('/:id/review', (req, res) => {
+router.patch('/:id/review', requireEditPermission, (req, res) => {
   const { action } = req.body || {}
   if (!['approve', 'request_edit', 'reject'].includes(action)) {
     return res.status(400).json({ message: 'Hành động không hợp lệ' })
@@ -37,12 +37,12 @@ router.patch('/:id/review', (req, res) => {
   res.json({ application: state })
 })
 
-router.patch('/:id/confirm-payment', (req, res) => {
+router.patch('/:id/confirm-payment', requireEditPermission, (req, res) => {
   const state = store.confirmApplicationPayment(req.params.id)
   res.json({ application: state })
 })
 
-router.post('/:id/payment-proof', (req, res) => {
+router.post('/:id/payment-proof', requireEditPermission, (req, res) => {
   const { fileName } = req.body || {}
   if (!fileName) {
     return res.status(400).json({ message: 'Thiếu tên tệp chứng từ' })
@@ -54,7 +54,7 @@ router.post('/:id/payment-proof', (req, res) => {
   res.json({ application: state })
 })
 
-router.patch('/:id/accept-payment', (req, res) => {
+router.patch('/:id/accept-payment', requireEditPermission, (req, res) => {
   const state = store.acceptApplicationPayment(req.params.id)
   if (!state) {
     return res.status(400).json({ message: 'Chưa có chứng từ thanh toán để chấp nhận' })
@@ -62,7 +62,7 @@ router.patch('/:id/accept-payment', (req, res) => {
   res.json({ application: state })
 })
 
-router.patch('/:id/quick-review', (req, res) => {
+router.patch('/:id/quick-review', requireEditPermission, (req, res) => {
   const { outcome } = req.body || {}
   if (!['licensed', 'expired'].includes(outcome)) {
     return res.status(400).json({ message: 'Kết quả không hợp lệ' })
@@ -74,7 +74,7 @@ router.patch('/:id/quick-review', (req, res) => {
   res.json({ application: state })
 })
 
-router.patch('/:id/send-certificate', (req, res) => {
+router.patch('/:id/send-certificate', requireEditPermission, (req, res) => {
   const baseUrl = getPublicBaseUrl()
   if (!baseUrl) {
     return res.status(503).json({ message: 'Máy chủ chưa cấu hình PUBLIC_BASE_URL để xác minh giấy phép' })
@@ -87,7 +87,7 @@ router.patch('/:id/send-certificate', (req, res) => {
   res.json({ application: state, verificationUrl })
 })
 
-router.post('/:id/certificate/prepare', (req, res) => {
+router.post('/:id/certificate/prepare', requireEditPermission, (req, res) => {
   const baseUrl = getPublicBaseUrl()
   if (!baseUrl) {
     return res.status(503).json({ message: 'Máy chủ chưa cấu hình PUBLIC_BASE_URL để xác minh giấy phép' })

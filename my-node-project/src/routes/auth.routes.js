@@ -6,7 +6,7 @@ const { signToken, verifyToken } = require('../middleware/auth')
 const router = express.Router()
 
 function toPublicUser(member) {
-  const { passwordHash, ...publicUser } = member
+  const { passwordHash, temporaryPassword, ...publicUser } = member
   return publicUser
 }
 
