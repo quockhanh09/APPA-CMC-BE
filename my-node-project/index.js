@@ -15,6 +15,8 @@ const PORT = process.env.PORT || 4000
 const allowedOrigins = new Set([
   'https://dangkysudung.appa.org.vn',
   'https://appa-cmc.vercel.app',
+  'https://www.appacmc.cloud',
+  'https://appacmc.cloud',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'http://localhost:5174',
