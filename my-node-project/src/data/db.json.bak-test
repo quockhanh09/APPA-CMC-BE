@@ -1,0 +1,1454 @@
+{
+  "staff": [
+    {
+      "id": "NV0001",
+      "name": "Admin",
+      "username": "Adminappa",
+      "email": "admin@appacmc.vn",
+      "phone": "0909 111 222",
+      "role": "admin",
+      "department": "Phòng CNTT",
+      "status": "active",
+      "joinedAt": "01/01/2022",
+      "isMainAdmin": true,
+      "permissions": {
+        "view": true,
+        "edit": true
+      },
+      "passwordHash": "$2b$10$z9uDTqEMlDz02HWDI0mrfuEAOxD3YkyAR9DqWZE0ViiWpxPTGDK3K",
+      "temporaryPassword": ""
+    },
+    {
+      "id": "NV0002",
+      "name": "test",
+      "username": "test123",
+      "email": "test@gmail.com",
+      "phone": "1234567890",
+      "role": "manager",
+      "department": "kế toán",
+      "status": "active",
+      "joinedAt": "17/09/2026",
+      "isMainAdmin": false,
+      "permissions": {
+        "view": true,
+        "edit": true
+      },
+      "passwordHash": "$2b$10$pfbHKTjAPcOQFUu5z2JgluxzHFVqgO9XYPSerVasiovM9yd30TNa.",
+      "temporaryPassword": "123456789"
+    }
+  ],
+  "applications": {
+    "#APPA_CMC_0001": {
+      "id": "#APPA_CMC_0001",
+      "createdAt": "2026-10-01T09:07:28.867Z",
+      "review": {
+        "status": "edit_requested",
+        "at": "2026-10-01T09:07:45.152Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-01T09:07:54.358Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-01T09:08:02.658Z"
+        }
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-01T09:07:28.867Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-01T09:07:28.867Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-01T09:07:28.867Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-01T09:07:45.153Z",
+          "text": "Nhân viên yêu cầu khách hàng sửa hồ sơ"
+        },
+        {
+          "at": "2026-10-01T09:07:54.358Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-01T09:08:02.659Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        }
+      ]
+    },
+    "#APPA_CMC_0002": {
+      "id": "#APPA_CMC_0002",
+      "createdAt": "2026-10-01T09:15:01.497Z",
+      "review": {
+        "status": "rejected",
+        "at": "2026-10-01T09:15:04.073Z"
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-01T09:15:01.497Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-01T09:15:01.497Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-01T09:15:01.497Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-01T09:15:04.074Z",
+          "text": "Nhân viên từ chối hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0003": {
+      "id": "#APPA_CMC_0003",
+      "createdAt": "2026-10-01T09:15:05.839Z",
+      "review": {
+        "status": "edit_requested",
+        "at": "2026-10-01T09:15:16.838Z"
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-01T09:15:05.840Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-01T09:15:05.840Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-01T09:15:05.840Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-01T09:15:16.839Z",
+          "text": "Nhân viên yêu cầu khách hàng sửa hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0007": {
+      "id": "#APPA_CMC_0007",
+      "createdAt": "2026-10-01T09:51:15.947Z",
+      "review": {
+        "status": "edit_requested",
+        "at": "2026-10-02T04:13:50.720Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-02T04:13:47.131Z",
+        "proof": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-01T09:51:15.947Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-01T09:51:15.947Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-01T09:51:15.947Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T04:13:47.131Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-02T04:13:50.721Z",
+          "text": "Nhân viên yêu cầu khách hàng sửa hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0009": {
+      "id": "#APPA_CMC_0009",
+      "createdAt": "2026-10-01T09:51:23.189Z",
+      "review": {
+        "status": "edit_requested",
+        "at": "2026-10-02T04:20:10.475Z"
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-01T09:51:23.189Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-01T09:51:23.189Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-01T09:51:23.189Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T04:20:10.475Z",
+          "text": "Nhân viên yêu cầu khách hàng sửa hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0004": {
+      "id": "#APPA_CMC_0004",
+      "createdAt": "2026-10-02T04:19:13.663Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-02T04:19:54.831Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-02T07:35:11.507Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-02T07:35:14.498Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-02T07:35:15.732Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-02T07:35:15.732Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:19:13.663Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:19:13.663Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:19:13.663Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T04:19:54.832Z",
+          "text": "Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán"
+        },
+        {
+          "at": "2026-10-02T07:35:11.507Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-02T07:35:14.499Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-02T07:35:15.732Z",
+          "text": "Nhân viên chấp nhận thanh toán và cấp giấy chứng nhận"
+        }
+      ]
+    },
+    "#APPA_CMC_0006": {
+      "id": "#APPA_CMC_0006",
+      "createdAt": "2026-10-02T04:19:56.355Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-05T03:00:26.666Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T03:00:26.666Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T03:00:23.719Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-05T03:00:26.666Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-05T03:00:26.666Z",
+        "sent": true,
+        "sentAt": "2026-10-05T03:00:30.097Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:19:56.356Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:19:56.356Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:19:56.356Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T03:00:20.958Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T03:00:23.719Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-05T03:00:26.666Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        },
+        {
+          "at": "2026-10-05T03:00:30.097Z",
+          "text": "Nhân viên gửi giấy chứng nhận cấp phép cho khách hàng"
+        }
+      ]
+    },
+    "#APPA_CMC_0010": {
+      "id": "#APPA_CMC_0010",
+      "createdAt": "2026-10-02T04:20:14.233Z",
+      "review": {
+        "status": "rejected",
+        "at": "2026-10-02T04:20:15.861Z"
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:20:14.233Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:20:14.233Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:20:14.233Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T04:20:15.862Z",
+          "text": "Nhân viên từ chối hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0005": {
+      "id": "#APPA_CMC_0005",
+      "createdAt": "2026-10-02T04:20:24.950Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-02T04:20:27.231Z"
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:20:24.950Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:20:24.950Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:20:24.950Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T04:20:27.232Z",
+          "text": "Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán"
+        }
+      ]
+    },
+    "#APPA_CMC_0015": {
+      "id": "#APPA_CMC_0015",
+      "createdAt": "2026-10-02T04:25:54.437Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:25:54.437Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:25:54.437Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:25:54.437Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0012": {
+      "id": "#APPA_CMC_0012",
+      "createdAt": "2026-10-02T04:25:59.633Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T04:25:59.634Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T04:25:59.634Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T04:25:59.634Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0030": {
+      "id": "#APPA_CMC_0030",
+      "createdAt": "2026-10-02T07:13:25.048Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T07:13:25.048Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T07:13:25.048Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T07:13:25.048Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0021": {
+      "id": "#APPA_CMC_0021",
+      "createdAt": "2026-10-02T07:32:35.331Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-02T07:32:35.332Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T07:32:35.332Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T07:32:35.332Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0008": {
+      "id": "#APPA_CMC_0008",
+      "createdAt": "2026-10-02T07:33:10.906Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-02T07:33:18.627Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-02T07:33:22.583Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-02T07:33:27.091Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-02T07:33:29.862Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-02T07:33:29.862Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-02T07:33:10.906Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-02T07:33:10.906Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-02T07:33:10.906Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-02T07:33:18.627Z",
+          "text": "Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán"
+        },
+        {
+          "at": "2026-10-02T07:33:22.583Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-02T07:33:27.091Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-02T07:33:29.863Z",
+          "text": "Nhân viên chấp nhận thanh toán và cấp giấy chứng nhận"
+        }
+      ]
+    },
+    "#APPA_CMC_0017": {
+      "id": "#APPA_CMC_0017",
+      "createdAt": "2026-10-05T02:44:46.094Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-05T02:44:49.592Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T03:37:32.558Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T03:37:35.546Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-05T03:37:38.883Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-05T03:37:38.883Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-05T02:44:46.094Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T02:44:46.094Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T02:44:46.094Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T02:44:49.592Z",
+          "text": "Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán"
+        },
+        {
+          "at": "2026-10-05T03:37:32.558Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T03:37:35.546Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-05T03:37:38.883Z",
+          "text": "Nhân viên chấp nhận thanh toán và cấp giấy chứng nhận"
+        }
+      ]
+    },
+    "#APPA_CMC_0018": {
+      "id": "#APPA_CMC_0018",
+      "createdAt": "2026-10-05T02:44:51.403Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T02:45:28.853Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T02:45:34.809Z"
+        },
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T02:44:51.403Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T02:44:51.403Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T02:44:51.403Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T02:45:28.853Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T02:45:34.809Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        }
+      ]
+    },
+    "#APPA_CMC_0019": {
+      "id": "#APPA_CMC_0019",
+      "createdAt": "2026-10-05T02:44:53.097Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-05T02:45:06.934Z"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T02:45:12.739Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T02:45:15.770Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-05T02:45:17.658Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-05T02:45:17.658Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-05T02:44:53.097Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T02:44:53.097Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T02:44:53.097Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T02:45:06.934Z",
+          "text": "Nhân viên duyệt hồ sơ và gửi đề nghị thanh toán"
+        },
+        {
+          "at": "2026-10-05T02:45:12.739Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T02:45:15.770Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-05T02:45:17.658Z",
+          "text": "Nhân viên chấp nhận thanh toán và cấp giấy chứng nhận"
+        }
+      ]
+    },
+    "#APPA_CMC_0014": {
+      "id": "#APPA_CMC_0014",
+      "createdAt": "2026-10-05T02:44:57.639Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-05T03:37:51.612Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T03:37:51.612Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T03:37:50.123Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-05T03:37:51.612Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-05T03:37:51.612Z"
+      },
+      "history": [
+        {
+          "at": "2026-10-05T02:44:57.639Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T02:44:57.639Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T02:44:57.639Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T03:37:47.687Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T03:37:50.123Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-05T03:37:51.612Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        }
+      ]
+    },
+    "#APPA_CMC_0046": {
+      "id": "#APPA_CMC_0046",
+      "createdAt": "2026-10-05T02:47:28.654Z",
+      "review": {
+        "status": "pending",
+        "at": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T02:47:28.654Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T02:47:28.654Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T02:47:28.654Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0011": {
+      "id": "#APPA_CMC_0011",
+      "createdAt": "2026-10-05T03:50:06.722Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T03:50:06.722Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T03:50:06.722Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T03:50:06.722Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0020": {
+      "id": "#APPA_CMC_0020",
+      "createdAt": "2026-10-05T03:51:08.683Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-05T03:51:17.931Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-05T03:51:17.931Z",
+        "proof": {
+          "fileName": "732299023_2533877313725259_3870412167339390115_n.jpg",
+          "uploadedAt": "2026-10-05T03:51:15.450Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-05T03:51:17.931Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-05T03:51:17.931Z",
+        "sent": true,
+        "sentAt": "2026-10-05T03:51:20.493Z",
+        "verificationToken": "982a9b5a49ed8e4c2610f6b9b481f209d082858d3cfe97f1",
+        "details": {
+          "unit": "Bitexco Financial",
+          "taxCode": "0102593021",
+          "facility": "Bitexco Financial Tower",
+          "businessType": "TTTM / Văn phòng",
+          "duration": "24 tháng"
+        }
+      },
+      "history": [
+        {
+          "at": "2026-10-05T03:51:08.683Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T03:51:08.683Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T03:51:08.683Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-05T03:51:12.787Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-05T03:51:15.450Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: 732299023_2533877313725259_3870412167339390115_n.jpg"
+        },
+        {
+          "at": "2026-10-05T03:51:17.931Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        },
+        {
+          "at": "2026-10-05T03:51:20.493Z",
+          "text": "Nhân viên gửi giấy chứng nhận cấp phép cho khách hàng"
+        }
+      ]
+    },
+    "#APPA_CMC_0024": {
+      "id": "#APPA_CMC_0024",
+      "createdAt": "2026-10-05T06:46:52.199Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T06:46:52.199Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T06:46:52.199Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T06:46:52.199Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0022": {
+      "id": "#APPA_CMC_0022",
+      "createdAt": "2026-10-05T06:46:54.423Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T06:46:54.423Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T06:46:54.423Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T06:46:54.423Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0023": {
+      "id": "#APPA_CMC_0023",
+      "createdAt": "2026-10-05T06:46:56.568Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T06:46:56.568Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T06:46:56.568Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T06:46:56.568Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0027": {
+      "id": "#APPA_CMC_0027",
+      "createdAt": "2026-10-05T06:46:57.952Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T06:46:57.952Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T06:46:57.952Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T06:46:57.952Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "#APPA_CMC_0026": {
+      "id": "#APPA_CMC_0026",
+      "createdAt": "2026-10-05T06:46:58.627Z",
+      "review": {
+        "status": "pending",
+        "at": null,
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-05T06:46:58.627Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-05T06:46:58.627Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-05T06:46:58.627Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        }
+      ]
+    },
+    "APPA-CMC-CF-650941-001": {
+      "id": "APPA-CMC-CF-650941-001",
+      "createdAt": "2026-10-06T02:49:52.811Z",
+      "review": {
+        "status": "edit_requested",
+        "at": "2026-10-13T04:18:15.696Z",
+        "forcedTone": null
+      },
+      "payment": {
+        "confirmed": false,
+        "confirmedAt": null,
+        "proof": null,
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-06T02:49:52.811Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-06T02:49:52.811Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-06T02:49:52.811Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-13T04:18:15.696Z",
+          "text": "Nhân viên yêu cầu khách hàng sửa hồ sơ"
+        }
+      ]
+    },
+    "APPA-CMC-CH-525059-003": {
+      "id": "APPA-CMC-CH-525059-003",
+      "createdAt": "2026-10-06T03:01:46.654Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-13T04:18:23.407Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-13T04:18:23.407Z",
+        "proof": null,
+        "verified": true,
+        "verifiedAt": "2026-10-13T04:18:23.407Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-13T04:18:23.407Z",
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-06T03:01:46.654Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-06T03:01:46.654Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-06T03:01:46.654Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-13T04:18:23.407Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        }
+      ]
+    },
+    "APPA-CMC-CH-479157-004": {
+      "id": "APPA-CMC-CH-479157-004",
+      "createdAt": "2026-10-06T03:03:22.775Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-13T04:25:49.723Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-13T04:25:49.723Z",
+        "proof": null,
+        "verified": true,
+        "verifiedAt": "2026-10-13T04:25:49.723Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-13T04:25:49.723Z",
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-06T03:03:22.775Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-06T03:03:22.775Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-06T03:03:22.775Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-13T04:25:28.919Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-13T04:25:49.723Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        }
+      ]
+    },
+    "APPA-CMC-CF-550906-001": {
+      "id": "APPA-CMC-CF-550906-001",
+      "createdAt": "2026-10-08T06:33:37.253Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-13T02:26:56.444Z",
+        "forcedTone": "expired"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-13T02:26:52.542Z",
+        "proof": {
+          "fileName": "ea1fccb7c46b23695330ce4a2735aace.jpeg",
+          "uploadedAt": "2026-10-13T02:48:15.871Z"
+        },
+        "verified": false,
+        "verifiedAt": null
+      },
+      "certificate": {
+        "issued": false,
+        "issuedAt": null,
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-08T06:33:37.253Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-08T06:33:37.253Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-08T06:33:37.253Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-13T02:26:52.542Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-13T02:26:56.444Z",
+          "text": "Nhân viên gửi đề nghị thanh toán - hồ sơ quá hạn"
+        },
+        {
+          "at": "2026-10-13T02:48:15.871Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: ea1fccb7c46b23695330ce4a2735aace.jpeg"
+        }
+      ]
+    },
+    "APPA-CMC-CF-539482-001": {
+      "id": "APPA-CMC-CF-539482-001",
+      "createdAt": "2026-10-13T06:52:06.498Z",
+      "review": {
+        "status": "approved",
+        "at": "2026-10-13T07:04:36.167Z",
+        "forcedTone": "licensed"
+      },
+      "payment": {
+        "confirmed": true,
+        "confirmedAt": "2026-10-13T07:04:36.167Z",
+        "proof": {
+          "fileName": "ea1fccb7c46b23695330ce4a2735aace.jpeg",
+          "uploadedAt": "2026-10-13T07:04:32.944Z"
+        },
+        "verified": true,
+        "verifiedAt": "2026-10-13T07:04:36.167Z"
+      },
+      "certificate": {
+        "issued": true,
+        "issuedAt": "2026-10-13T07:04:36.167Z",
+        "sent": false,
+        "sentAt": null
+      },
+      "history": [
+        {
+          "at": "2026-10-13T06:52:06.498Z",
+          "text": "Khách hàng tạo đơn thành công"
+        },
+        {
+          "at": "2026-10-13T06:52:06.498Z",
+          "text": "Khách hàng đồng ý Điều khoản dịch vụ và Cam kết sử dụng v2"
+        },
+        {
+          "at": "2026-10-13T06:52:06.498Z",
+          "text": "Hệ thống gửi email xác nhận hồ sơ"
+        },
+        {
+          "at": "2026-10-13T07:04:28.323Z",
+          "text": "Khách hàng xác nhận đã thanh toán"
+        },
+        {
+          "at": "2026-10-13T07:04:32.944Z",
+          "text": "Khách hàng tải lên chứng từ thanh toán: ea1fccb7c46b23695330ce4a2735aace.jpeg"
+        },
+        {
+          "at": "2026-10-13T07:04:36.167Z",
+          "text": "Nhân viên duyệt hồ sơ và cấp phép"
+        }
+      ]
+    }
+  },
+  "registrationData": {
+    "APPA-CMC-CF-650941-001": {
+      "id": "APPA-CMC-CF-650941-001",
+      "unit": "test",
+      "taxCode": "1234566778",
+      "facility": "test",
+      "type": "coffee",
+      "fee": "—",
+      "duration": "12 tháng",
+      "issueDate": null,
+      "paid": false,
+      "registration": {
+        "businessTypeLabel": "Quán café",
+        "legalRepresentative": "123 test",
+        "phone": "1234556778",
+        "email": "test123@gmail.com",
+        "companyAddress": "123 test, Ba Đình, Hà Nội",
+        "storeAddress": "123 test, Ba Đình, Hà Nội",
+        "scaleDetails": "Diện tích: 20 m2",
+        "karaokeSubType": "",
+        "fileName": "",
+        "fileMimeType": ""
+      },
+      "createdAt": "2026-10-06T02:49:52.811Z"
+    },
+    "APPA-CMC-CH-525059-003": {
+      "id": "APPA-CMC-CH-525059-003",
+      "unit": "testtt",
+      "taxCode": "123121515",
+      "facility": "testtttty",
+      "type": "store",
+      "fee": "—",
+      "duration": "6 tháng",
+      "issueDate": null,
+      "paid": false,
+      "registration": {
+        "businessTypeLabel": "Cửa hàng, showroom",
+        "legalRepresentative": "testtt",
+        "phone": "12341241142",
+        "email": "test124@gmail.com",
+        "companyAddress": "123 test, An Nông, Thanh Hóa",
+        "storeAddress": "123145 testttt, A Dơi, Quảng Trị",
+        "scaleDetails": "Diện tích: 12 m2",
+        "karaokeSubType": "",
+        "fileName": "",
+        "fileMimeType": ""
+      },
+      "createdAt": "2026-10-06T03:01:46.654Z"
+    },
+    "APPA-CMC-CH-479157-004": {
+      "id": "APPA-CMC-CH-479157-004",
+      "unit": "testttt1",
+      "taxCode": "12312313123",
+      "facility": "test2134",
+      "type": "store",
+      "fee": "478.170 VNĐ",
+      "duration": "6 tháng",
+      "issueDate": null,
+      "paid": false,
+      "registration": {
+        "businessTypeLabel": "Cửa hàng, showroom",
+        "legalRepresentative": "thiqohd",
+        "phone": "123213144",
+        "email": "tesst124@gmail.com",
+        "companyAddress": "thanh hóa têst, An Nông, Thanh Hóa",
+        "storeAddress": "12314 testtt09, A Dơi, Quảng Trị",
+        "scaleDetails": "Diện tích: 12 m2",
+        "karaokeSubType": "",
+        "fileName": "",
+        "fileMimeType": ""
+      },
+      "createdAt": "2026-10-06T03:03:22.775Z"
+    },
+    "APPA-CMC-CF-550906-001": {
+      "id": "APPA-CMC-CF-550906-001",
+      "unit": "công ty test",
+      "taxCode": "8974564",
+      "facility": "testtestst",
+      "type": "coffee",
+      "fee": "4.385.502 VNĐ",
+      "duration": "12 tháng",
+      "issueDate": null,
+      "paid": false,
+      "registration": {
+        "businessTypeLabel": "Quán café",
+        "legalRepresentative": "nguyễn văn A",
+        "phone": "1234567890",
+        "email": "tes1@gmail.com",
+        "companyAddress": "phố test, Ái Quốc, Hải Phòng",
+        "storeAddress": "1234 test, Ái Quốc, Hải Phòng",
+        "scaleDetails": "Diện tích: 123 m2",
+        "karaokeSubType": "",
+        "fileName": "",
+        "fileMimeType": ""
+      },
+      "createdAt": "2026-10-08T06:33:37.253Z"
+    },
+    "APPA-CMC-CF-539482-001": {
+      "id": "APPA-CMC-CF-539482-001",
+      "unit": "jmnasvfjh",
+      "taxCode": "1234124142",
+      "facility": "123123 qửq",
+      "type": "coffee",
+      "fee": "765.072 VNĐ",
+      "duration": "24 tháng",
+      "issueDate": null,
+      "paid": false,
+      "registration": {
+        "businessTypeLabel": "Quán café",
+        "legalRepresentative": "lahdfhks",
+        "phone": "311341563",
+        "email": "test@gmail.com",
+        "companyAddress": "laknladns, Bình Long, Đồng Nai",
+        "storeAddress": "qeqdasdad, Bình Long, Đồng Nai",
+        "scaleDetails": "Diện tích: 12 m2",
+        "karaokeSubType": "",
+        "fileName": "",
+        "fileMimeType": ""
+      },
+      "createdAt": "2026-10-13T06:52:06.498Z"
+    }
+  }
+}
