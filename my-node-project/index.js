@@ -8,6 +8,7 @@ const staffRoutes = require('./src/routes/staff.routes')
 const applicationsRoutes = require('./src/routes/applications.routes')
 const registrationsRoutes = require('./src/routes/registrations.routes')
 const verificationRoutes = require('./src/routes/verification.routes')
+const googleProxyRoutes = require('./src/routes/google-proxy.routes')
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -38,6 +39,7 @@ app.get('/api/health', (req, res) => {
 })
 
 app.use(verificationRoutes)
+app.use(googleProxyRoutes)
 app.use('/api/auth', authRoutes)
 app.use('/api/staff', staffRoutes)
 app.use('/api/registrations', registrationsRoutes)
