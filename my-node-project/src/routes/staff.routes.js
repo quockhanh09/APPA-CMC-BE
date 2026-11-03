@@ -28,29 +28,28 @@ function formatToday() {
 
 router.use(verifyToken)
 
-router.get('/', requireAdmin, (req, res) => {
+router.get('/', requireAdmin, async (req, res) => {
   const canSeePassword = Boolean(req.user?.permissions?.edit)
+  const staff = await store.getStaff()
   res.json({
-    staff: store
-      .getStaff()
-      .map((member) => (canSeePassword ? toAdminUser(member) : toPublicUser(member))),
+    staff: staff.map((member) => (canSeePassword ? toAdminUser(member) : toPublicUser(member))),
   })
 })
 
-router.post('/', requireAdmin, requireEditPermission, (req, res) => {
+router.post('/', requireAdmin, requireEditPermission, async (req, res) => {
   const { name, username, email, phone, role, department, password, permissions } = req.body || {}
   if (!name || !username || !email || !phone || !role || !department || !password) {
     return res.status(400).json({ message: 'Vui lòng điền đầy đủ thông tin nhân sự' })
   }
-  if (store.findStaffByUsername(username)) {
+  if (await store.findStaffByUsername(username)) {
     return res.status(409).json({ message: 'Tài khoản đã được sử dụng' })
   }
-  if (store.findStaffByEmail(email)) {
+  if (await store.findStaffByEmail(email)) {
     return res.status(409).json({ message: 'Email đã được sử dụng' })
   }
 
   const member = {
-    id: store.nextStaffId(),
+    id: await store.nextStaffId(),
     name,
     username,
     email,
@@ -67,13 +66,13 @@ router.post('/', requireAdmin, requireEditPermission, (req, res) => {
     temporaryPassword: password,
     passwordHash: bcrypt.hashSync(password, 10),
   }
-  store.addStaff(member)
-  res.status(201).json({ staff: toPublicUser(member) })
+  const created = await store.addStaff(member)
+  res.status(201).json({ staff: toPublicUser(created) })
 })
 
 // Sua thong tin + phan quyen nhan su (bao gom ca dat lai mat khau tạm)
-router.patch('/:id', requireAdmin, requireEditPermission, (req, res) => {
-  const member = store.findStaffById(req.params.id)
+router.patch('/:id', requireAdmin, requireEditPermission, async (req, res) => {
+  const member = await store.findStaffById(req.params.id)
   if (!member) {
     return res.status(404).json({ message: 'Không tìm thấy nhân sự' })
   }
@@ -94,13 +93,13 @@ router.patch('/:id', requireAdmin, requireEditPermission, (req, res) => {
   }
 
   if (updates.username) {
-    const existed = store.findStaffByUsername(updates.username)
+    const existed = await store.findStaffByUsername(updates.username)
     if (existed && existed.id !== member.id) {
       return res.status(409).json({ message: 'Tài khoản đã được sử dụng' })
     }
   }
   if (updates.email) {
-    const existed = store.findStaffByEmail(updates.email)
+    const existed = await store.findStaffByEmail(updates.email)
     if (existed && existed.id !== member.id) {
       return res.status(409).json({ message: 'Email đã được sử dụng' })
     }
@@ -141,19 +140,19 @@ router.patch('/:id', requireAdmin, requireEditPermission, (req, res) => {
     return res.status(400).json({ message: 'Không thể tự khóa tài khoản đang đăng nhập' })
   }
 
-  const updated = store.updateStaff(member.id, updates)
+  const updated = await store.updateStaff(member.id, updates)
   res.json({ staff: toAdminUser(updated) })
 })
 
-router.patch('/:id/lock', requireAdmin, requireEditPermission, (req, res) => {
-  const member = store.findStaffById(req.params.id)
+router.patch('/:id/lock', requireAdmin, requireEditPermission, async (req, res) => {
+  const member = await store.findStaffById(req.params.id)
   if (!member) {
     return res.status(404).json({ message: 'Không tìm thấy nhân sự' })
   }
   if (member.isMainAdmin) {
     return res.status(400).json({ message: 'Không thể khóa tài khoản quản trị chính' })
   }
-  const updated = store.updateStaff(member.id, {
+  const updated = await store.updateStaff(member.id, {
     status: member.status === 'locked' ? 'active' : 'locked',
   })
   res.json({ staff: toPublicUser(updated) })

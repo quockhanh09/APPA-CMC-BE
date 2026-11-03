@@ -21,8 +21,8 @@ function formatDate(value) {
   return new Date(value).toLocaleDateString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
 }
 
-router.get('/verify/:token', (req, res) => {
-  const state = store.findApplicationByVerificationToken(req.params.token)
+router.get('/verify/:token', async (req, res) => {
+  const state = await store.findApplicationByVerificationToken(req.params.token)
   if (!state || !state.certificate?.issued || !state.certificate?.sent) {
     return res.status(404).type('html').send(
       '<!doctype html><html lang="vi"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Không tìm thấy giấy phép</title><h1>Không tìm thấy giấy phép</h1><p>Mã xác minh không hợp lệ hoặc giấy phép chưa được phát hành.</p></html>',

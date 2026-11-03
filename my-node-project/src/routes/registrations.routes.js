@@ -21,7 +21,7 @@ function readText(body, key, maxLength = 500) {
   return value.trim().slice(0, maxLength)
 }
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body && typeof req.body === 'object' ? req.body : {}
   const id = readText(body, 'registrationCode', 80).toUpperCase()
   const businessType = readText(body, 'businessType', 30)
@@ -70,6 +70,7 @@ router.post('/', (req, res) => {
       typeof feeAmount === 'number'
         ? `${new Intl.NumberFormat('vi-VN').format(feeAmount)} VNĐ`
         : '—',
+    feeAmount: typeof feeAmount === 'number' ? Math.round(feeAmount) : 0,
     duration: readText(body, 'paymentCycle', 40) || '—',
     issueDate: null,
     paid: false,
@@ -87,7 +88,7 @@ router.post('/', (req, res) => {
     },
   }
 
-  const created = store.createRegistration(registration)
+  const created = await store.createRegistration(registration)
   if (!created) {
     return res.status(409).json({ message: 'Mã đăng ký đã tồn tại' })
   }

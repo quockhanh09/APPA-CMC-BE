@@ -14,72 +14,75 @@ function getPublicBaseUrl() {
   return `http://localhost:${process.env.PORT || 4000}`
 }
 
-router.get('/', verifyToken, (req, res) => {
-  res.json({ applications: store.getRegisteredApplications() })
+router.get('/', verifyToken, async (req, res) => {
+  res.json({ applications: await store.getRegisteredApplications() })
 })
 
 router.use(verifyToken)
 
-router.get('/:id', (req, res) => {
-  const state = store.getApplicationState(req.params.id)
+router.get('/:id', async (req, res) => {
+  const state = await store.getApplicationState(req.params.id)
+  if (!state) {
+    return res.status(404).json({ message: 'Không tìm thấy hồ sơ' })
+  }
   res.json({ application: state })
 })
 
-router.patch('/:id/review', requireEditPermission, (req, res) => {
+router.patch('/:id/review', requireEditPermission, async (req, res) => {
   const { action } = req.body || {}
   if (!['approve', 'request_edit', 'reject'].includes(action)) {
     return res.status(400).json({ message: 'Hành động không hợp lệ' })
   }
-  const state = store.reviewApplication(req.params.id, action)
+  const state = await store.reviewApplication(req.params.id, action)
   if (!state) {
     return res.status(409).json({ message: 'Hồ sơ đã được xử lý trước đó' })
   }
   res.json({ application: state })
 })
 
-router.patch('/:id/confirm-payment', requireEditPermission, (req, res) => {
-  const state = store.confirmApplicationPayment(req.params.id)
+router.patch('/:id/confirm-payment', requireEditPermission, async (req, res) => {
+  const state = await store.confirmApplicationPayment(req.params.id)
   res.json({ application: state })
 })
 
-router.post('/:id/payment-proof', requireEditPermission, (req, res) => {
+router.post('/:id/payment-proof', requireEditPermission, async (req, res) => {
   const { fileName } = req.body || {}
   if (!fileName) {
     return res.status(400).json({ message: 'Thiếu tên tệp chứng từ' })
   }
-  const state = store.uploadApplicationPaymentProof(req.params.id, fileName)
+  const state = await store.uploadApplicationPaymentProof(req.params.id, fileName)
   if (!state) {
     return res.status(400).json({ message: 'Khách hàng chưa xác nhận thanh toán' })
   }
   res.json({ application: state })
 })
 
-router.patch('/:id/accept-payment', requireEditPermission, (req, res) => {
-  const state = store.acceptApplicationPayment(req.params.id)
+router.patch('/:id/accept-payment', requireEditPermission, async (req, res) => {
+  const state = await store.acceptApplicationPayment(req.params.id)
   if (!state) {
     return res.status(400).json({ message: 'Chưa có chứng từ thanh toán để chấp nhận' })
   }
   res.json({ application: state })
 })
 
-router.patch('/:id/quick-review', requireEditPermission, (req, res) => {
+router.patch('/:id/quick-review', requireEditPermission, async (req, res) => {
   const { outcome } = req.body || {}
   if (!['licensed', 'expired'].includes(outcome)) {
     return res.status(400).json({ message: 'Kết quả không hợp lệ' })
   }
-  const state = store.quickReviewApplication(req.params.id, outcome)
+  const state = await store.quickReviewApplication(req.params.id, outcome)
   if (!state) {
     return res.status(409).json({ message: 'Hồ sơ đã được xử lý trước đó' })
   }
   res.json({ application: state })
 })
 
-router.patch('/:id/send-certificate', requireEditPermission, (req, res) => {
+router.patch('/:id/send-certificate', requireEditPermission, async (req, res) => {
   const baseUrl = getPublicBaseUrl()
   if (!baseUrl) {
     return res.status(503).json({ message: 'Máy chủ chưa cấu hình PUBLIC_BASE_URL để xác minh giấy phép' })
   }
-  const state = store.sendApplicationCertificate(req.params.id)
+  const state = await store.sendApplicationCertificate(req.params.id)
   if (!state) {
     return res.status(400).json({ message: 'Hồ sơ chưa được chuẩn bị hoặc chưa được cấp phép' })
   }
@@ -87,7 +90,7 @@ router.patch('/:id/send-certificate', requireEditPermission, (req, res) => {
   res.json({ application: state, verificationUrl })
 })
 
-router.post('/:id/certificate/prepare', requireEditPermission, (req, res) => {
+router.post('/:id/certificate/prepare', requireEditPermission, async (req, res) => {
   const baseUrl = getPublicBaseUrl()
   if (!baseUrl) {
     return res.status(503).json({ message: 'Máy chủ chưa cấu hình PUBLIC_BASE_URL để xác minh giấy phép' })
@@ -108,7 +111,7 @@ router.post('/:id/certificate/prepare', requireEditPermission, (req, res) => {
       typeof details[field] === 'string' ? details[field].trim().slice(0, 200) : '',
     ]),
   )
-  const state = store.prepareApplicationCertificate(req.params.id, certificateDetails)
+  const state = await store.prepareApplicationCertificate(req.params.id, certificateDetails)
   if (!state) {
     return res.status(400).json({ message: 'Hồ sơ chưa được cấp phép' })
   }

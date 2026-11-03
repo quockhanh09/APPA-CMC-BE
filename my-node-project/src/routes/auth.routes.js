@@ -10,13 +10,13 @@ function toPublicUser(member) {
   return publicUser
 }
 
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   const { username, password } = req.body || {}
   if (!username || !password) {
     return res.status(400).json({ message: 'Vui lòng nhập tài khoản và mật khẩu' })
   }
 
-  const member = store.findStaffByUsername(username)
+  const member = await store.findStaffByUsername(username)
   if (!member) {
     return res.status(401).json({ message: 'Tài khoản hoặc mật khẩu không đúng' })
   }
@@ -33,17 +33,17 @@ router.post('/login', (req, res) => {
   res.json({ token, user: toPublicUser(member) })
 })
 
-router.get('/me', verifyToken, (req, res) => {
-  const member = store.findStaffById(req.user.id)
+router.get('/me', verifyToken, async (req, res) => {
+  const member = await store.findStaffById(req.user.id)
   if (!member) {
     return res.status(404).json({ message: 'Không tìm thấy tài khoản' })
   }
   res.json({ user: toPublicUser(member) })
 })
 
-router.patch('/me', verifyToken, (req, res) => {
+router.patch('/me', verifyToken, async (req, res) => {
   const { name, phone, email, department } = req.body || {}
-  const member = store.findStaffById(req.user.id)
+  const member = await store.findStaffById(req.user.id)
   if (!member) {
     return res.status(404).json({ message: 'Không tìm thấy tài khoản' })
   }
@@ -52,11 +52,11 @@ router.patch('/me', verifyToken, (req, res) => {
   if (phone) updates.phone = phone
   if (email) updates.email = email
   if (department) updates.department = department
-  const updated = store.updateStaff(member.id, updates)
+  const updated = await store.updateStaff(member.id, updates)
   res.json({ user: toPublicUser(updated) })
 })
 
-router.patch('/change-password', verifyToken, (req, res) => {
+router.patch('/change-password', verifyToken, async (req, res) => {
   const { currentPassword, newPassword } = req.body || {}
   if (!currentPassword || !newPassword) {
     return res.status(400).json({ message: 'Vui lòng nhập mật khẩu hiện tại và mật khẩu mới' })
@@ -64,14 +64,14 @@ router.patch('/change-password', verifyToken, (req, res) => {
   if (newPassword.length < 6) {
     return res.status(400).json({ message: 'Mật khẩu mới phải có ít nhất 6 ký tự' })
   }
-  const member = store.findStaffById(req.user.id)
+  const member = await store.findStaffById(req.user.id)
   if (!member) {
     return res.status(404).json({ message: 'Không tìm thấy tài khoản' })
   }
   if (!bcrypt.compareSync(currentPassword, member.passwordHash)) {
     return res.status(401).json({ message: 'Mật khẩu hiện tại không đúng' })
   }
-  store.updateStaff(member.id, { passwordHash: bcrypt.hashSync(newPassword, 10) })
+  await store.updateStaff(member.id, { passwordHash: bcrypt.hashSync(newPassword, 10) })
   res.json({ message: 'Đổi mật khẩu thành công' })
 })
 
