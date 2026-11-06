@@ -491,6 +491,324 @@ async function uploadApplicationPaymentProof(id, fileName) {
   return mapWorkflow(updated, await fetchHistory(id))
 }
 
+// ----------------------------------------------------------------------------
+// PERFORMANCE REGISTRATIONS (trang Tổ chức biểu diễn) — bảng
+// public.performance_registrations. Form bên NDCP (PerformancePage.jsx) gửi về.
+// ----------------------------------------------------------------------------
+
+function mapPerformanceRegistration(row) {
+  if (!row) return null
+  return {
+    id: row.id,
+    performanceType: row.performance_type,
+    performanceTypeLabel: row.performance_type_label || '',
+    ticketMode: row.ticket_mode,
+    orgName: row.org_name,
+    taxCode: row.tax_code || '',
+    orgAddress: row.org_address || '',
+    representative: row.representative || '',
+    legalRepresentative: row.legal_representative || '',
+    phone: row.phone || '',
+    email: row.email || '',
+    programName: row.program_name || '',
+    programTime: row.program_time || '',
+    programAddress: row.program_address || '',
+    venueCapacity: row.venue_capacity,
+    avgTicketPrice: row.avg_ticket_price,
+    contactName: row.contact_name || '',
+    contactPosition: row.contact_position || '',
+    contactPhone: row.contact_phone || '',
+    contactEmail: row.contact_email || '',
+    contactAddress: row.contact_address || '',
+    songsCount: row.songs_count ?? 0,
+    songs: Array.isArray(row.songs) ? row.songs : [],
+    feeAmount: row.fee_amount ?? 0,
+    fileName: row.file_name || '',
+    fileMimeType: row.file_mime_type || '',
+    status: row.status,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }
+}
+
+async function getPerformanceRegistrations() {
+  const { data, error } = await supabase
+    .from('performance_registrations')
+    .select('*')
+    .order('created_at', { ascending: false })
+  throwIfError(error)
+  return (data || []).map(mapPerformanceRegistration)
+}
+
+async function createPerformanceRegistration(registration) {
+  const { data: existing, error: findError } = await supabase
+    .from('performance_registrations')
+    .select('id')
+    .eq('id', registration.id)
+    .maybeSingle()
+  throwIfError(findError)
+  if (existing) return null
+
+  const insertRow = {
+    id: registration.id,
+    performance_type: registration.performanceType,
+    performance_type_label: registration.performanceTypeLabel || null,
+    ticket_mode: registration.ticketMode || 'free',
+    org_name: registration.orgName,
+    tax_code: registration.taxCode || null,
+    org_address: registration.orgAddress || null,
+    representative: registration.representative || null,
+    legal_representative: registration.legalRepresentative || null,
+    phone: registration.phone || null,
+    email: registration.email || null,
+    program_name: registration.programName || null,
+    program_time: registration.programTime || null,
+    program_address: registration.programAddress || null,
+    venue_capacity: Number.isFinite(registration.venueCapacity) ? registration.venueCapacity : null,
+    avg_ticket_price: Number.isFinite(registration.avgTicketPrice) ? Math.round(registration.avgTicketPrice) : null,
+    contact_name: registration.contactName || null,
+    contact_position: registration.contactPosition || null,
+    contact_phone: registration.contactPhone || null,
+    contact_email: registration.contactEmail || null,
+    contact_address: registration.contactAddress || null,
+    songs_count: Number.isFinite(registration.songsCount) ? registration.songsCount : 0,
+    songs: Array.isArray(registration.songs) ? registration.songs : [],
+    fee_amount: Number.isFinite(registration.feeAmount) ? Math.round(registration.feeAmount) : 0,
+    file_name: registration.fileName || null,
+    file_mime_type: registration.fileMimeType || null,
+  }
+
+  const { data, error } = await supabase
+    .from('performance_registrations')
+    .insert(insertRow)
+    .select()
+    .single()
+  throwIfError(error)
+  return mapPerformanceRegistration(data)
+}
+
+async function updatePerformanceRegistrationStatus(id, status) {
+  const { data, error } = await supabase
+    .from('performance_registrations')
+    .update({ status })
+    .eq('id', id)
+    .select()
+    .maybeSingle()
+  throwIfError(error)
+  return mapPerformanceRegistration(data)
+}
+
+// ----------------------------------------------------------------------------
+// COPY REGISTRATIONS (trang Đăng ký sao chép) — bảng public.copy_registrations.
+// Form bên NDCP (CopyPage.jsx) gửi về.
+// ----------------------------------------------------------------------------
+
+function mapCopyRegistration(row) {
+  if (!row) return null
+  return {
+    id: row.id,
+    copyType: row.copy_type,
+    copyTypeLabel: row.copy_type_label || '',
+    orgNameVN: row.org_name_vn,
+    orgNameEN: row.org_name_en || '',
+    taxCode: row.tax_code || '',
+    orgAddress: row.org_address || '',
+    legalRepresentative: row.legal_representative || '',
+    inChargePerson: row.in_charge_person || '',
+    phone: row.phone || '',
+    email: row.email || '',
+    invoiceEmail: row.invoice_email || '',
+    contentTitle: row.content_title || '',
+    contentDetail: row.content_detail || '',
+    usageModel: row.usage_model || '',
+    productionFormat: row.production_format || '',
+    factoryPrice: row.factory_price,
+    quantity: row.quantity,
+    recordsCount: row.records_count ?? 0,
+    records: Array.isArray(row.records) ? row.records : [],
+    feeAmount: row.fee_amount ?? 0,
+    fileName: row.file_name || '',
+    fileMimeType: row.file_mime_type || '',
+    status: row.status,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }
+}
+
+async function getCopyRegistrations() {
+  const { data, error } = await supabase
+    .from('copy_registrations')
+    .select('*')
+    .order('created_at', { ascending: false })
+  throwIfError(error)
+  return (data || []).map(mapCopyRegistration)
+}
+
+async function createCopyRegistration(registration) {
+  const { data: existing, error: findError } = await supabase
+    .from('copy_registrations')
+    .select('id')
+    .eq('id', registration.id)
+    .maybeSingle()
+  throwIfError(findError)
+  if (existing) return null
+
+  const insertRow = {
+    id: registration.id,
+    copy_type: registration.copyType,
+    copy_type_label: registration.copyTypeLabel || null,
+    org_name_vn: registration.orgNameVN,
+    org_name_en: registration.orgNameEN || null,
+    tax_code: registration.taxCode || null,
+    org_address: registration.orgAddress || null,
+    legal_representative: registration.legalRepresentative || null,
+    in_charge_person: registration.inChargePerson || null,
+    phone: registration.phone || null,
+    email: registration.email || null,
+    invoice_email: registration.invoiceEmail || null,
+    content_title: registration.contentTitle || null,
+    content_detail: registration.contentDetail || null,
+    usage_model: registration.usageModel || null,
+    production_format: registration.productionFormat || null,
+    factory_price: Number.isFinite(registration.factoryPrice) ? Math.round(registration.factoryPrice) : null,
+    quantity: Number.isFinite(registration.quantity) ? registration.quantity : null,
+    records_count: Number.isFinite(registration.recordsCount) ? registration.recordsCount : 0,
+    records: Array.isArray(registration.records) ? registration.records : [],
+    fee_amount: Number.isFinite(registration.feeAmount) ? Math.round(registration.feeAmount) : 0,
+    file_name: registration.fileName || null,
+    file_mime_type: registration.fileMimeType || null,
+  }
+
+  const { data, error } = await supabase
+    .from('copy_registrations')
+    .insert(insertRow)
+    .select()
+    .single()
+  throwIfError(error)
+  return mapCopyRegistration(data)
+}
+
+async function updateCopyRegistrationStatus(id, status) {
+  const { data, error } = await supabase
+    .from('copy_registrations')
+    .update({ status })
+    .eq('id', id)
+    .select()
+    .maybeSingle()
+  throwIfError(error)
+  return mapCopyRegistration(data)
+}
+
+// ----------------------------------------------------------------------------
+// USAGE UNITS (trang Đơn vị sử dụng) — bảng public.usage_units.
+// Khác các bảng *_registrations: bảng này do nhân sự CMS tự quản lý
+// (thêm / sửa / xóa), không phải đơn gửi về từ form công khai.
+// ----------------------------------------------------------------------------
+
+function mapUsageUnit(row) {
+  if (!row) return null
+  return {
+    id: row.id,
+    companyName: row.company_name,
+    taxCode: row.tax_code || '',
+    facilityName: row.facility_name || '',
+    city: row.city || '',
+    ward: row.ward || '',
+    address: row.address || '',
+    category: row.category || 'other',
+    licenseStart: toDisplayDate(row.license_start),
+    licenseEnd: toDisplayDate(row.license_end),
+    areaM2: row.area_m2 === null || row.area_m2 === undefined ? null : Number(row.area_m2),
+    status: row.status,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }
+}
+
+async function getUsageUnits() {
+  const { data, error } = await supabase
+    .from('usage_units')
+    .select('*')
+    .order('created_at', { ascending: false })
+  throwIfError(error)
+  return (data || []).map(mapUsageUnit)
+}
+
+async function findUsageUnitById(id) {
+  const { data, error } = await supabase.from('usage_units').select('*').eq('id', id).maybeSingle()
+  throwIfError(error)
+  return mapUsageUnit(data)
+}
+
+async function nextUsageUnitId() {
+  const { data, error } = await supabase.from('usage_units').select('id')
+  throwIfError(error)
+  const maxNum = (data || []).reduce((max, u) => {
+    const num = parseInt(String(u.id).replace('DV', ''), 10)
+    return Number.isNaN(num) ? max : Math.max(max, num)
+  }, 0)
+  return `DV${String(maxNum + 1).padStart(4, '0')}`
+}
+
+async function createUsageUnit(unit) {
+  const insertRow = {
+    id: unit.id,
+    company_name: unit.companyName,
+    tax_code: unit.taxCode || null,
+    facility_name: unit.facilityName || null,
+    city: unit.city || null,
+    ward: unit.ward || null,
+    address: unit.address || null,
+    category: unit.category || 'other',
+    license_start: fromDisplayDate(unit.licenseStart),
+    license_end: fromDisplayDate(unit.licenseEnd),
+    area_m2: Number.isFinite(unit.areaM2) ? unit.areaM2 : null,
+    status: unit.status || 'pending',
+  }
+  const { data, error } = await supabase.from('usage_units').insert(insertRow).select().single()
+  throwIfError(error)
+  return mapUsageUnit(data)
+}
+
+async function updateUsageUnit(id, updates = {}) {
+  const row = {}
+  if (updates.companyName !== undefined) row.company_name = updates.companyName
+  if (updates.taxCode !== undefined) row.tax_code = updates.taxCode || null
+  if (updates.facilityName !== undefined) row.facility_name = updates.facilityName || null
+  if (updates.city !== undefined) row.city = updates.city || null
+  if (updates.ward !== undefined) row.ward = updates.ward || null
+  if (updates.address !== undefined) row.address = updates.address || null
+  if (updates.category !== undefined) row.category = updates.category
+  if (updates.licenseStart !== undefined) row.license_start = fromDisplayDate(updates.licenseStart)
+  if (updates.licenseEnd !== undefined) row.license_end = fromDisplayDate(updates.licenseEnd)
+  if (updates.areaM2 !== undefined) row.area_m2 = Number.isFinite(updates.areaM2) ? updates.areaM2 : null
+  if (updates.status !== undefined) row.status = updates.status
+
+  if (Object.keys(row).length === 0) {
+    return findUsageUnitById(id)
+  }
+
+  const { data, error } = await supabase
+    .from('usage_units')
+    .update(row)
+    .eq('id', id)
+    .select()
+    .maybeSingle()
+  throwIfError(error)
+  return mapUsageUnit(data)
+}
+
+async function deleteUsageUnit(id) {
+  const { data, error } = await supabase
+    .from('usage_units')
+    .delete()
+    .eq('id', id)
+    .select('id')
+    .maybeSingle()
+  throwIfError(error)
+  return Boolean(data)
+}
+
 module.exports = {
   getStaff,
   findStaffByEmail,
@@ -510,4 +828,16 @@ module.exports = {
   prepareApplicationCertificate,
   sendApplicationCertificate,
   findApplicationByVerificationToken,
+  getPerformanceRegistrations,
+  createPerformanceRegistration,
+  updatePerformanceRegistrationStatus,
+  getCopyRegistrations,
+  createCopyRegistration,
+  updateCopyRegistrationStatus,
+  getUsageUnits,
+  findUsageUnitById,
+  nextUsageUnitId,
+  createUsageUnit,
+  updateUsageUnit,
+  deleteUsageUnit,
 }
