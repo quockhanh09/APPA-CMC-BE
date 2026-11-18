@@ -96,7 +96,7 @@ router.post('/:id/certificate/prepare', requireEditPermission, async (req, res) 
     return res.status(503).json({ message: 'Máy chủ chưa cấu hình PUBLIC_BASE_URL để xác minh giấy phép' })
   }
   const { details } = req.body || {}
-  const requiredFields = ['unit', 'facility', 'businessType', 'duration']
+  const requiredFields = ['unit', 'taxCode', 'facility', 'businessType', 'duration']
   if (
     !details ||
     typeof details !== 'object' ||
@@ -117,6 +117,14 @@ router.post('/:id/certificate/prepare', requireEditPermission, async (req, res) 
   }
   const verificationUrl = `${baseUrl}/verify/${state.certificate.verificationToken}`
   res.json({ application: state, verificationUrl })
+})
+
+router.delete('/:id', requireEditPermission, async (req, res) => {
+  const deleted = await store.deleteApplication(req.params.id)
+  if (!deleted) {
+    return res.status(404).json({ message: 'Không tìm thấy hồ sơ đăng ký' })
+  }
+  res.json({ ok: true })
 })
 
 module.exports = router

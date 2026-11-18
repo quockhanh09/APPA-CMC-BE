@@ -10,6 +10,7 @@ const registrationsRoutes = require('./src/routes/registrations.routes')
 const performanceRoutes = require('./src/routes/performance.routes')
 const copyRoutes = require('./src/routes/copy.routes')
 const unitsRoutes = require('./src/routes/units.routes')
+const artistNotesRoutes = require('./src/routes/artist-notes.routes')
 const verificationRoutes = require('./src/routes/verification.routes')
 const googleProxyRoutes = require('./src/routes/google-proxy.routes')
 
@@ -49,6 +50,7 @@ app.use('/api/registrations', registrationsRoutes)
 app.use('/api/performance-registrations', performanceRoutes)
 app.use('/api/copy-registrations', copyRoutes)
 app.use('/api/units', unitsRoutes)
+app.use('/api/artist-notes', artistNotesRoutes)
 app.use('/api/applications', applicationsRoutes)
 
 app.use((req, res) => {

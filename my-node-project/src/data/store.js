@@ -474,6 +474,14 @@ async function confirmApplicationPayment(id) {
   return mapWorkflow(updated, await fetchHistory(id))
 }
 
+async function deleteApplication(id) {
+  const row = await fetchApplicationRow(id)
+  if (!row) return false
+  const { error } = await supabase.from('applications').delete().eq('id', id)
+  throwIfError(error)
+  return true
+}
+
 async function uploadApplicationPaymentProof(id, fileName) {
   const row = await fetchApplicationRow(id)
   if (!row || !row.payment_confirmed) {
@@ -587,6 +595,17 @@ async function createPerformanceRegistration(registration) {
   return mapPerformanceRegistration(data)
 }
 
+async function deletePerformanceRegistration(id) {
+  const { data, error } = await supabase
+    .from('performance_registrations')
+    .delete()
+    .eq('id', id)
+    .select('id')
+    .maybeSingle()
+  throwIfError(error)
+  return Boolean(data)
+}
+
 async function updatePerformanceRegistrationStatus(id, status) {
   const { data, error } = await supabase
     .from('performance_registrations')
@@ -686,6 +705,17 @@ async function createCopyRegistration(registration) {
     .single()
   throwIfError(error)
   return mapCopyRegistration(data)
+}
+
+async function deleteCopyRegistration(id) {
+  const { data, error } = await supabase
+    .from('copy_registrations')
+    .delete()
+    .eq('id', id)
+    .select('id')
+    .maybeSingle()
+  throwIfError(error)
+  return Boolean(data)
 }
 
 async function updateCopyRegistrationStatus(id, status) {
@@ -809,6 +839,110 @@ async function deleteUsageUnit(id) {
   return Boolean(data)
 }
 
+// ----------------------------------------------------------------------------
+// ARTIST CONTACT NOTES (trang Tra cứu Thông tin Nghệ sĩ - "Nhập Ghi Chú" /
+// "Tình trạng liên hệ") — bảng public.artist_contact_notes.
+// ----------------------------------------------------------------------------
+
+function mapArtistNoteRow(row) {
+  if (!row) return null
+  return {
+    id: row.id,
+    artistName: row.artist_name,
+    contactPerson: row.contact_person,
+    channel: row.channel,
+    channelValue: row.channel_value,
+    noteContent: row.note_content,
+    isContacted: row.is_contacted,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
+  }
+}
+
+async function getArtistNotes() {
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .select('*')
+    .order('created_at', { ascending: false })
+  throwIfError(error)
+  return (data || []).map(mapArtistNoteRow)
+}
+
+async function findArtistNoteById(id) {
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .select('*')
+    .eq('id', id)
+    .maybeSingle()
+  throwIfError(error)
+  return mapArtistNoteRow(data)
+}
+
+async function nextArtistNoteId() {
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .select('id')
+  throwIfError(error)
+  const maxNum = (data || []).reduce((max, note) => {
+    const num = parseInt(String(note.id).replace('NC', ''), 10)
+    return Number.isNaN(num) ? max : Math.max(max, num)
+  }, 0)
+  return `NC${String(maxNum + 1).padStart(4, '0')}`
+}
+
+async function createArtistNote(note) {
+  const insertRow = {
+    id: note.id,
+    artist_name: note.artistName,
+    contact_person: note.contactPerson,
+    channel: note.channel,
+    channel_value: note.channelValue,
+    note_content: note.noteContent,
+    is_contacted: Boolean(note.isContacted),
+  }
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .insert(insertRow)
+    .select()
+    .single()
+  throwIfError(error)
+  return mapArtistNoteRow(data)
+}
+
+async function updateArtistNote(id, updates = {}) {
+  const row = {}
+  if (updates.artistName !== undefined) row.artist_name = updates.artistName
+  if (updates.contactPerson !== undefined) row.contact_person = updates.contactPerson
+  if (updates.channel !== undefined) row.channel = updates.channel
+  if (updates.channelValue !== undefined) row.channel_value = updates.channelValue
+  if (updates.noteContent !== undefined) row.note_content = updates.noteContent
+  if (updates.isContacted !== undefined) row.is_contacted = Boolean(updates.isContacted)
+
+  if (Object.keys(row).length === 0) {
+    return findArtistNoteById(id)
+  }
+
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .update(row)
+    .eq('id', id)
+    .select()
+    .maybeSingle()
+  throwIfError(error)
+  return mapArtistNoteRow(data)
+}
+
+async function deleteArtistNote(id) {
+  const { data, error } = await supabase
+    .from('artist_contact_notes')
+    .delete()
+    .eq('id', id)
+    .select('id')
+    .maybeSingle()
+  throwIfError(error)
+  return Boolean(data)
+}
+
 module.exports = {
   getStaff,
   findStaffByEmail,
@@ -828,16 +962,25 @@ module.exports = {
   prepareApplicationCertificate,
   sendApplicationCertificate,
   findApplicationByVerificationToken,
+  deleteApplication,
   getPerformanceRegistrations,
   createPerformanceRegistration,
   updatePerformanceRegistrationStatus,
+  deletePerformanceRegistration,
   getCopyRegistrations,
   createCopyRegistration,
   updateCopyRegistrationStatus,
+  deleteCopyRegistration,
   getUsageUnits,
   findUsageUnitById,
   nextUsageUnitId,
   createUsageUnit,
   updateUsageUnit,
   deleteUsageUnit,
+  getArtistNotes,
+  findArtistNoteById,
+  nextArtistNoteId,
+  createArtistNote,
+  updateArtistNote,
+  deleteArtistNote,
 }

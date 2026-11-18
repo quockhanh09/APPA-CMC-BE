@@ -123,4 +123,12 @@ router.patch('/:id/status', requireEditPermission, async (req, res) => {
   res.json({ registration: updated })
 })
 
+router.delete('/:id', requireEditPermission, async (req, res) => {
+  const deleted = await store.deleteCopyRegistration(req.params.id)
+  if (!deleted) {
+    return res.status(404).json({ message: 'Không tìm thấy hồ sơ' })
+  }
+  res.json({ ok: true })
+})
+
 module.exports = router
