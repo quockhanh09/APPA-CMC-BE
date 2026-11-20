@@ -5,7 +5,7 @@ const { verifyToken, requireEditPermission } = require('../middleware/auth')
 const router = express.Router()
 
 // Kênh liên hệ hợp lệ
-const CHANNELS = ['Zalo', 'Messenger', 'Email', 'Số điện thoại']
+const CHANNELS = ['Zalo', 'Messenger', 'Email', 'Số điện thoại', 'Khác']
 
 function readText(body, key, maxLength = 500) {
   const value = body[key]
