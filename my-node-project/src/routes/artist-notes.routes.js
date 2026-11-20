@@ -43,7 +43,6 @@ function readNotePayload(body, { partial = false } = {}) {
 
   const noteContent = readText(body, 'noteContent', 2000)
   if (!partial || body.noteContent !== undefined) {
-    if (!noteContent) return { error: 'Thiếu nội dung ghi chú' }
     note.noteContent = noteContent
   }
 
